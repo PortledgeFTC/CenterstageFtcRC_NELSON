@@ -37,11 +37,11 @@ public class BasicDriverTeleOp extends OpMode {
         double motorSpeedY = 0.0;
         double motorSpeedRx = 0.0;
 
-        telemetry.addData("Dist Right (CM): ", myMecanumBot.getCurrentDistanceRight(DistanceUnit.CM));
-        telemetry.addData("Dist Right (IN): ", myMecanumBot.getCurrentDistanceRight(DistanceUnit.INCH));
-        telemetry.addData("Dist Back (CM): ", myMecanumBot.getCurrentDistanceBack(DistanceUnit.CM));
-        telemetry.addData("Dist Back (IN): ", myMecanumBot.getCurrentDistanceBack(DistanceUnit.INCH));
-        telemetry.update();
+//        telemetry.addData("Dist Right (CM): ", myMecanumBot.getCurrentDistanceRight(DistanceUnit.CM));
+//        telemetry.addData("Dist Right (IN): ", myMecanumBot.getCurrentDistanceRight(DistanceUnit.INCH));
+//        telemetry.addData("Dist Back (CM): ", myMecanumBot.getCurrentDistanceBack(DistanceUnit.CM));
+//        telemetry.addData("Dist Back (IN): ", myMecanumBot.getCurrentDistanceBack(DistanceUnit.INCH));
+//        telemetry.update();
 
         //----------------------//
         // Main Driving Control //

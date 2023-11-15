@@ -54,16 +54,16 @@ public class RoboSetup {
     //////////////////////
     //      Servos      //
     //////////////////////
-    private CRServo inTake;
+//    private CRServo inTake;
     //private Servo carousel2;
     //private Servo flick;
 
     //////////////////////
     //      Sensors      //
     //////////////////////
-    private DistanceSensor myDistanceSensorRight;
-    private DistanceSensor myDistanceSensorBack;
-    //private TouchSensor myLiftTouch;
+//    private DistanceSensor myDistanceSensorRight;
+//    private DistanceSensor myDistanceSensorBack;
+//    //private TouchSensor myLiftTouch;
 
     /////////////////////////////
     //     Counter Value       //
@@ -106,13 +106,13 @@ public class RoboSetup {
         //frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Setting up the Sensors
-        myDistanceSensorRight = hwMap.get(DistanceSensor.class, "distSensor");
-        myDistanceSensorBack = hwMap.get(DistanceSensor.class, "distSensorBack");
+//        myDistanceSensorRight = hwMap.get(DistanceSensor.class, "distSensor");
+//        myDistanceSensorBack = hwMap.get(DistanceSensor.class, "distSensorBack");
         // myLiftTouch = hwMap.get(TouchSensor.class, "liftTouch");
 
         //Setting up the servos
-        inTake = hwMap.get(CRServo.class, "inTake");
-        inTake.resetDeviceConfigurationForOpMode();
+//        inTake = hwMap.get(CRServo.class, "inTake");
+//        inTake.resetDeviceConfigurationForOpMode();
 
     } //END OF Init
 
@@ -281,9 +281,9 @@ public class RoboSetup {
      * @return Double value for the distance read from the sensor
      *
      */
-    public double getCurrentDistanceRight(DistanceUnit du){
-        return myDistanceSensorRight.getDistance(du);
-    }
+//    public double getCurrentDistanceRight(DistanceUnit du){
+//        return myDistanceSensorRight.getDistance(du);
+//    }
 
     /**
      * This method will return the sensor reading
@@ -293,9 +293,9 @@ public class RoboSetup {
      * @return Double value for the distance read from the sensor
      *
      */
-    public double getCurrentDistanceBack(DistanceUnit du){
-        return myDistanceSensorBack.getDistance(du);
-    }
+//    public double getCurrentDistanceBack(DistanceUnit du){
+//        return myDistanceSensorBack.getDistance(du);
+//    }
 
 
     /**
