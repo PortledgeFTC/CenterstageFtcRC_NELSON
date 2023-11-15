@@ -69,6 +69,10 @@ public class RoboSetup {
     //     Counter Value       //
     ////////////////////////////
     private double ticksPerRotation;
+    private double ticksPerRotationFL;
+    private double ticksPerRotationBL;
+    private double ticksPerRotationFR;
+    private double ticksPerRotationBR;
 
     //Add the param for init with HardwareMap
     public void init(HardwareMap hwMap) {
@@ -306,6 +310,54 @@ public class RoboSetup {
 //        isLiftPressed = myLiftTouch.isPressed();
 //        return isLiftPressed;
 //    }
+
+    /**
+     * This method will return the motor encoder rotations
+     *
+     * FRONT RIGHT WHEEL
+     *
+     * @return - the number of rotations
+     */
+    public double getRotationFR() {
+        ticksPerRotationFR = frontRight.getMotorType().getTicksPerRev();
+        return frontRight.getCurrentPosition() / ticksPerRotationFR;
+    }
+
+    /**
+     * This method will return the motor encoder rotations
+     *
+     * FRONT RIGHT WHEEL
+     *
+     * @return - the number of rotations
+     */
+    public double getRotationBR() {
+        ticksPerRotationBR = backRight.getMotorType().getTicksPerRev();
+        return backRight.getCurrentPosition() / ticksPerRotationBR;
+    }
+
+    /**
+     * This method will return the motor encoder rotations
+     *
+     * FRONT RIGHT WHEEL
+     *
+     * @return - the number of rotations
+     */
+    public double getRotationFL() {
+        ticksPerRotationFL = frontLeft.getMotorType().getTicksPerRev();
+        return frontLeft.getCurrentPosition() / ticksPerRotationFL;
+    }
+
+    /**
+     * This method will return the motor encoder rotations
+     *
+     * FRONT RIGHT WHEEL
+     *
+     * @return - the number of rotations
+     */
+    public double getRotationBL() {
+        ticksPerRotationBL = backRight.getMotorType().getTicksPerRev();
+        return backLeft.getCurrentPosition() / ticksPerRotationBL;
+    }
 
 
 }//END OF CLASS

@@ -71,7 +71,7 @@ public class BasicDriverTeleOp extends OpMode {
             myMecanumBot.setSlideRight(0.0);
         }
 
-        
+
     }//END OF LOOP
 
 }//END OF CLASS
