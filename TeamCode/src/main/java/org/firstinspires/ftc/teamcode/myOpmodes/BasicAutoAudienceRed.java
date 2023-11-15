@@ -15,6 +15,7 @@ package org.firstinspires.ftc.teamcode.myOpmodes;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
 
@@ -52,7 +53,7 @@ public class BasicAutoAudienceRed extends LinearOpMode {
 
         //STEP 01.5 - Wait for other team to get out of the way
         //Thread.sleep(1500);
-        while (opModeIsActive() && (runtime.seconds() < 1.5)) {
+        while (opModeIsActive() && (runtime.seconds() < 5)) {
             telemetry.addData("Status: ", "Waiting for Alliance Partner to move.");
             telemetry.update();
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
@@ -61,7 +62,8 @@ public class BasicAutoAudienceRed extends LinearOpMode {
         runtime.reset();//resets the timer
 
         //STEP 02 - Slide Right off of wall about 2 inches *future step would be to read the
-        while(opModeIsActive() && myMec.getRotationBR() < (0.5)){
+        myMec.resetEncoders();
+        while(opModeIsActive() && (myMec.getRotationBR() < 0.5)){
             telemetry.addData("Rotation: ", myMec.getRotationBR());
             telemetry.addData("Status:", "Step 2 Execute");
             telemetry.update();
