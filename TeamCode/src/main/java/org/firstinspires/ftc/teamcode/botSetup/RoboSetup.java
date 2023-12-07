@@ -25,7 +25,8 @@ import com.qualcomm.robotcore.hardware.CRServo;
  *  Port 3 - backRight
  *
  *  SERVOS
- *  Port 0 - TBD
+ *  Port 0 - bucketServo
+ *  Port 5 - intakeServo (continous)
  *
  *  SENSORS
  *  I2C Expansion
@@ -49,13 +50,13 @@ public class RoboSetup {
     private DcMotor backRight;
     private DcMotor frontLeft;
     private DcMotor frontRight;
-   // private DcMotor liftMotor;
+    private DcMotor armMotor; //This will lift the virtual four bar lift
    // private DcMotor intakeMotor;
     //////////////////////
     //      Servos      //
     //////////////////////
-//    private CRServo inTake;
-    //private Servo carousel2;
+    private CRServo intakeServo; //This will control the spinning intake
+    private Servo bucketServo; //this will rotate the bucket up and down
     //private Servo flick;
 
     //////////////////////
@@ -73,6 +74,8 @@ public class RoboSetup {
     private double ticksPerRotationBL;
     private double ticksPerRotationFR;
     private double ticksPerRotationBR;
+
+    private double ticksPerRotationAM;
 
     //Add the param for init with HardwareMap
     public void init(HardwareMap hwMap) {
@@ -105,14 +108,21 @@ public class RoboSetup {
         //All Right will be reversed ... never
         //frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        //Arm Motor which is driving a virtual four bar lift
+        armMotor = hwMap.get(DcMotor.class, "armMotor");
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         //Setting up the Sensors
 //        myDistanceSensorRight = hwMap.get(DistanceSensor.class, "distSensor");
 //        myDistanceSensorBack = hwMap.get(DistanceSensor.class, "distSensorBack");
         // myLiftTouch = hwMap.get(TouchSensor.class, "liftTouch");
 
         //Setting up the servos
-//        inTake = hwMap.get(CRServo.class, "inTake");
-//        inTake.resetDeviceConfigurationForOpMode();
+        intakeServo = hwMap.get(CRServo.class, "intakeServo");
+        intakeServo.resetDeviceConfigurationForOpMode();
+        bucketServo = hwMap.get(Servo.class, "bucketServo");
+        bucketServo.resetDeviceConfigurationForOpMode();
 
     } //END OF Init
 
@@ -366,5 +376,16 @@ public class RoboSetup {
         return backLeft.getCurrentPosition() / ticksPerRotationBL;
     }
 
+    /**
+     * This method will return the motor encoder rotations
+     *
+     * FRONT RIGHT WHEEL
+     *
+     * @return - the number of rotations
+     */
+    public double getRotationArmLift() {
+        ticksPerRotationAM = backRight.getMotorType().getTicksPerRev();
+        return armMotor.getCurrentPosition() / ticksPerRotationAM;
+    }
 
 }//END OF CLASS
