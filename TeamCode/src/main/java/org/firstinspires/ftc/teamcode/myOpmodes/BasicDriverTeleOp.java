@@ -9,14 +9,15 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
 
 /**
- * This is a driver program for a small mecanum chassis
- *  this robot will have an intake, a lift, and some
- *  servos.
+ * This is a Iterative Opmode driver program for a small
+ *  mecanum chassis this robot will have an intake, a
+ *  virtual four bar lift, powered by a motor,
+ *  and some servos interating with the Pixel.
  *
  * @author DNel2
  * @version 11/28/2021 v1.0 updated 2/17/2022 v2.0
  */
-@TeleOp(name = "Basic Mecanum Drive: Iterative Opmode", group = "Iterative Opmode")
+@TeleOp(name = "Basic Mec Drive", group = "Iterative Opmode")
 //@Disabled
 public class BasicDriverTeleOp extends OpMode {
     //Create an instance of the RoboSetup
@@ -78,15 +79,35 @@ public class BasicDriverTeleOp extends OpMode {
         //Press X to spin servo for IN or A for OUT
         if (gamepad1.a) {
             myMecanumBot.setIntatkeRotation(-0.75);
-            telemetry.addData("Servo Moving", "Yes");
+            telemetry.addData("Servo Moving OUT", "Yes");
             telemetry.update();
         } else if (gamepad1.x){
             myMecanumBot.setIntatkeRotation(0.75);
-            telemetry.addData("Servo Moving", "Yes");
+            telemetry.addData("Servo Moving IN", "Yes");
             telemetry.update();
         }else{
             myMecanumBot.setIntatkeRotation(0);
         }
+
+        //Servo for Bucket, pixel collected
+        if(gamepad1.y){
+            myMecanumBot.setBucketServoPos(0.1);
+        } else if(gamepad1.b){
+            myMecanumBot.setBucketServoPos(0.5);
+        }else{
+            myMecanumBot.setBucketServoPos(0.8);
+        }
+
+        //Full Arm Movement
+
+        //Arm Postition Down, ready for Pixel
+        // This will require the motor to return to a set position
+        //  and for the bucket servo to be rotated to tilt the bucket
+        //  down.
+
+        //Arm Position Up, ready for delivery
+
+        //
 
     }//END OF LOOP
 

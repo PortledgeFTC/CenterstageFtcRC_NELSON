@@ -297,8 +297,17 @@ public class RoboSetup {
      *
      * @param power
      */
-        public void setIntatkeRotation(double power){
+    public void setIntatkeRotation(double power){
         intakeServo.setPower(power);
+    }
+
+    /**
+     * This method will control the bucket servo
+     * @param servoPos - this variable will set the position of the servo
+     *
+     */
+    public void setBucketServoPos(double servoPos){
+        bucketServo.setPosition(servoPos);
     }
 
     //////////////////////////////////////////////
