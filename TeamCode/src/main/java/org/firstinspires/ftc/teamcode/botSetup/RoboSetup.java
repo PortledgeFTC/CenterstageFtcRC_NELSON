@@ -342,12 +342,12 @@ public class RoboSetup {
      */
     public void setArmToDelivery(){
         //This is the value for moving to the correct position
-        int countToMove = 10;
+        int countToMove = 300;
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.1);
         // Determine new target position, and pass to motor controller
-        newUpTarget = armMotor.getTargetPosition() + countToMove;
+        newUpTarget = armMotor.getCurrentPosition() + countToMove;
         armMotor.setTargetPosition(newUpTarget);
 
         // Turn On RUN_TO_POSITION
