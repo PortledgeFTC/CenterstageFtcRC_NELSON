@@ -115,7 +115,7 @@ public class BasicDriverTeleOp extends OpMode {
         if(gamepad1.y){
             myMecanumBot.setArmToDelivery();
         } else if (gamepad1.b) {
-//            myMecanumBot.setArmToCollect();
+            myMecanumBot.setArmToCollect();
         }
 
     }//END OF LOOP

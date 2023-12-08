@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * This is the code for setting up my Centerstage robot which consists of
@@ -98,6 +99,8 @@ public class RoboSetup {
 
     int newUpTarget;
     int newDownTarget;
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     //Add the param for init with HardwareMap
     public void init(HardwareMap hwMap) {
@@ -339,7 +342,7 @@ public class RoboSetup {
     /////////////////////////////////////////////
 
     /**
-     * This metor will move both the motor for the
+     * This method will move both the motor for the
      *   arm and the servo to the position to be up.
      */
     public void setArmToDelivery(){
@@ -366,6 +369,46 @@ public class RoboSetup {
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.55);
+
+    }
+
+    /**
+     * The setArmToCollect() method will return the
+     *   collection arm with bucket back to the
+     *   low position ready to collect more Pixels.
+     */
+    public void setArmToCollect(){
+        //This is the value for moving to the correct position
+        int countToMove = -325;
+
+        //Moves the bucket up so it can pass by the intake
+        setBucketServoPos(0.1);
+
+        //Reset the timer
+        runtime.reset();
+
+        while(runtime.seconds() < 1){
+            //This is a break for the servo to have enough time to move
+        }
+
+        // Determine new target position, and pass to motor controller
+        newUpTarget = armMotor.getCurrentPosition() + countToMove;
+        armMotor.setTargetPosition(newUpTarget);
+
+        // Turn On RUN_TO_POSITION
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // start motion.
+        armMotor.setPower(0.2);
+
+        // keep looping while we are still active
+        while (armMotor.isBusy()) {
+            //This is an empty loop to make sure that the arm has time to run
+        }
+
+
+        //Moves the bucket up so it can pass by the intake
+        setBucketServoPos(0.05);
 
     }
 
