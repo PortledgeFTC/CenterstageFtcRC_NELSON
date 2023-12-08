@@ -93,7 +93,7 @@ public class BasicDriverTeleOp extends OpMode {
         // 0.5 is a Good delivery
         // 0.1 is a Good up pos for once the pixel is collect
         // 0.2 is Good for being almost ready to receive the pixel
-        // 0.28
+        // 0.28 is Good for Collecting
         if(gamepad1.dpad_up){//good up pos
             myMecanumBot.setBucketServoPos(0.1);
         } else if(gamepad1.dpad_down){
@@ -106,14 +106,17 @@ public class BasicDriverTeleOp extends OpMode {
 
         //Full Arm Movement
 
-        //Arm Postition Down, ready for Pixel
+        //Arm Position Down, ready for Pixel
         // This will require the motor to return to a set position
         //  and for the bucket servo to be rotated to tilt the bucket
         //  down.
 
-        //Arm Position Up, ready for delivery
-
-        //
+        //Arm Position Up (Y), ready for delivery, Arm Pos Down (B)
+        if(gamepad1.y){
+            myMecanumBot.setArmToDelivery();
+        } else if (gamepad1.b) {
+//            myMecanumBot.setArmToCollect();
+        }
 
     }//END OF LOOP
 

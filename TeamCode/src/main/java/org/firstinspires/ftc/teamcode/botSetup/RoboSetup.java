@@ -77,6 +77,26 @@ public class RoboSetup {
 
     private double ticksPerRotationAM;
 
+
+    //goBilda Encoder count 537.7 PPR at the Output Shaft
+    static final double GOBILDA_COUNTS_OUTPUT = 537.7;
+
+    // Calculate the COUNTS_PER_INCH for your specific drive train.
+    // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
+    // For external drive gearing, set DRIVE_GEAR_REDUCTION as needed.
+    // For example, use a value of 2.0 for a 12-tooth spur gear driving a 24-tooth spur gear.
+    // This is gearing DOWN for less speed and more torque.
+    // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
+    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // External Gearing.
+    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (GOBILDA_COUNTS_OUTPUT * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     DRIVE_SPEED             = 0.6;
+    static final double     TURN_SPEED              = 0.5;
+
+    int newUpTarget;
+    int newDownTarget;
+
     //Add the param for init with HardwareMap
     public void init(HardwareMap hwMap) {
         //setting up the motors
@@ -308,6 +328,45 @@ public class RoboSetup {
      */
     public void setBucketServoPos(double servoPos){
         bucketServo.setPosition(servoPos);
+    }
+
+    //////////////////////////////////////////////
+    //                                          //
+    //      Arm Methods                         //
+    //                                          //
+    /////////////////////////////////////////////
+
+    /**
+     * This metor will move both the motor for the
+     *   arm and the servo to the position to be up.
+     */
+    public void setArmToDelivery(){
+        //This is the value for moving to the correct position
+        int countToMove = 10;
+
+        //Moves the bucket up so it can pass by the intake
+        setBucketServoPos(0.1);
+        // Determine new target position, and pass to motor controller
+        newUpTarget = armMotor.getTargetPosition() + countToMove;
+        armMotor.setTargetPosition(newUpTarget);
+
+        // Turn On RUN_TO_POSITION
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // start motion.
+        armMotor.setPower(0.3);
+
+        // keep looping while we are still active
+        while (armMotor.isBusy()) {
+            //This is an empty loop to make sure that the arm has time to run
+        }
+
+        // Stop all motion;
+        armMotor.setPower(0);
+
+        //Moves the bucket up so it can pass by the intake
+        setBucketServoPos(0.5);
+
     }
 
     //////////////////////////////////////////////
