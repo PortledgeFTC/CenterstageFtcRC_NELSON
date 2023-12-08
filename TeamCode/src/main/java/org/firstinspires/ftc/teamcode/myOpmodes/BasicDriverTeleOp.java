@@ -71,6 +71,22 @@ public class BasicDriverTeleOp extends OpMode {
             myMecanumBot.setSlideRight(0.0);
         }
 
+        //--------------------------//
+        // Buttons for Manipulators //
+        //--------------------------//
+
+        //Press X to spin servo for IN or A for OUT
+        if (gamepad1.a) {
+            myMecanumBot.setIntatkeRotation(-0.75);
+            telemetry.addData("Servo Moving", "Yes");
+            telemetry.update();
+        } else if (gamepad1.x){
+            myMecanumBot.setIntatkeRotation(0.75);
+            telemetry.addData("Servo Moving", "Yes");
+            telemetry.update();
+        }else{
+            myMecanumBot.setIntatkeRotation(0);
+        }
 
     }//END OF LOOP
 

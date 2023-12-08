@@ -51,7 +51,7 @@ public class RoboSetup {
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor armMotor; //This will lift the virtual four bar lift
-   // private DcMotor intakeMotor;
+    // private DcMotor intakeMotor;
     //////////////////////
     //      Servos      //
     //////////////////////
@@ -283,6 +283,22 @@ public class RoboSetup {
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    /////////////////////////////////////////////
+    //                                          //
+    //            Servo Methods                 //
+    //                                          //
+    /////////////////////////////////////////////
+
+    /**
+     *  This method will rotate the servo
+     *    that is being used for the intake
+     *
+     * @param power
+     */
+        public void setIntatkeRotation(double power){
+        intakeServo.setPower(power);
     }
 
     //////////////////////////////////////////////
