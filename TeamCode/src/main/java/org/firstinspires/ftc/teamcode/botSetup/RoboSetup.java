@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.botSetup;
 
+import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -103,35 +105,35 @@ public class RoboSetup {
         //Left Back Wheel Motor
         backLeft = hwMap.get(DcMotor.class, "backLeft");
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(BRAKE);
         //All left will be reversed for Math version of Mec Drive
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Left Front Wheel Motor
         frontLeft = hwMap.get(DcMotor.class, "frontLeft");
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeft.setZeroPowerBehavior(BRAKE);
         //All left will be reversed for Math version of Mec Drive
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Right Back Wheel Motor
         backRight = hwMap.get(DcMotor.class, "backRight");
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(BRAKE);
         //All Right will be reversed ... never
         //backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Right Front Wheel Motor
         frontRight = hwMap.get(DcMotor.class, "frontRight");
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(BRAKE);
         //All Right will be reversed ... never
         //frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //Arm Motor which is driving a virtual four bar lift
         armMotor = hwMap.get(DcMotor.class, "armMotor");
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armMotor.setZeroPowerBehavior(BRAKE);
 
         //Setting up the Sensors
 //        myDistanceSensorRight = hwMap.get(DistanceSensor.class, "distSensor");
@@ -342,7 +344,7 @@ public class RoboSetup {
      */
     public void setArmToDelivery(){
         //This is the value for moving to the correct position
-        int countToMove = 300;
+        int countToMove = 325;
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.1);
@@ -361,11 +363,9 @@ public class RoboSetup {
             //This is an empty loop to make sure that the arm has time to run
         }
 
-        // Stop all motion;
-        armMotor.setPower(0);
 
         //Moves the bucket up so it can pass by the intake
-        setBucketServoPos(0.5);
+        setBucketServoPos(0.55);
 
     }
 
