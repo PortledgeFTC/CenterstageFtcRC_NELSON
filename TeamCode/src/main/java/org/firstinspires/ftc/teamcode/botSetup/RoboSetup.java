@@ -61,7 +61,9 @@ public class RoboSetup {
     //////////////////////
     private CRServo intakeServo; //This will control the spinning intake
     private Servo bucketServo; //this will rotate the bucket up and down
-    //private Servo flick;
+
+    private Servo bucketClampServo;
+
 
     //////////////////////
     //      Sensors      //
@@ -145,10 +147,15 @@ public class RoboSetup {
         // myLiftTouch = hwMap.get(TouchSensor.class, "liftTouch");
 
         //Setting up the servos
+        //The intake servo is a continuous rotation servo
         intakeServo = hwMap.get(CRServo.class, "intakeServo");
         intakeServo.resetDeviceConfigurationForOpMode();
+        // The bucket servo is a standard torque servo
         bucketServo = hwMap.get(Servo.class, "bucketServo");
         bucketServo.resetDeviceConfigurationForOpMode();
+        //The bucket clamp servo is a standard torque servo
+        bucketClampServo = hwMap.get(Servo.class,"clampServo");
+        bucketClampServo.resetDeviceConfigurationForOpMode();
 
     } //END OF Init
 
@@ -336,6 +343,14 @@ public class RoboSetup {
         bucketServo.setPosition(servoPos);
     }
 
+    /**
+     * The setBucketClamp() method will open and close the clamp
+     * and take a double pos value
+     */
+    public void setBucketClampServo(double servoPos){
+        bucketClampServo.setPosition(servoPos);
+    }
+
     //////////////////////////////////////////////
     //                                          //
     //      Arm Methods                         //
@@ -352,6 +367,8 @@ public class RoboSetup {
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.1);
+        //Ensures the clamp is down
+        setBucketClampServo(0.3);
         // Determine new target position, and pass to motor controller
         newUpTarget = armMotor.getCurrentPosition() + countToMove;
         armMotor.setTargetPosition(newUpTarget);
@@ -360,7 +377,7 @@ public class RoboSetup {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // start motion.
-        armMotor.setPower(0.3);
+        armMotor.setPower(0.2);
 
         // keep looping while we are still active
         while (armMotor.isBusy()) {
@@ -370,7 +387,6 @@ public class RoboSetup {
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.55);
-
     }
 
     /**
@@ -380,7 +396,7 @@ public class RoboSetup {
      */
     public void setArmToCollect(){
         //This is the value for moving to the correct position
-        int countToMove = -325;
+        int countToMove = -315;
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.1);
@@ -400,7 +416,7 @@ public class RoboSetup {
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // start motion.
-        armMotor.setPower(0.2);
+        armMotor.setPower(0.1);
 
         // keep looping while we are still active
         while (armMotor.isBusy()) {
@@ -408,8 +424,12 @@ public class RoboSetup {
         }
 
 
-        //Moves the bucket up so it can pass by the intake
+        //Moves the bucket to a "ready" position
         setBucketServoPos(0.05);
+        //Open up the clamp ready for Pixels
+        setBucketClampServo(0.65);
+
+
 
     }
 

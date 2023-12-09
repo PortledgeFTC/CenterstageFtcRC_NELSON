@@ -23,6 +23,10 @@ public class BasicDriverTeleOp extends OpMode {
     //Create an instance of the RoboSetup
     RoboSetup myMecanumBot = new RoboSetup();
 
+    Boolean isArmUp = false;
+    Boolean isArmDown = true;
+    String armState = "The Arm is Down";
+
     @Override
     public void init(){
         myMecanumBot.init(hardwareMap);
@@ -104,6 +108,15 @@ public class BasicDriverTeleOp extends OpMode {
             myMecanumBot.setBucketServoPos(0.28);
         }
 
+        //Position Info:
+        //  0.3 close
+        //  0.65 open
+        if(gamepad1.left_bumper){
+            myMecanumBot.setBucketClampServo(0.3);
+        }else if(gamepad1.right_bumper){
+            myMecanumBot.setBucketClampServo(0.65);
+        }
+
         //Full Arm Movement
 
         //Arm Position Down, ready for Pixel
@@ -113,9 +126,25 @@ public class BasicDriverTeleOp extends OpMode {
 
         //Arm Position Up (Y), ready for delivery, Arm Pos Down (B)
         if(gamepad1.y){
-            myMecanumBot.setArmToDelivery();
+            if(!isArmUp){
+                myMecanumBot.setArmToDelivery();
+                telemetry.addData("Arm Status", "Arm is Moving up");
+                telemetry.update();
+                isArmUp = true;
+            }else{
+                telemetry.addData("Arm Status", "The Arm is already up...stop pushing Y!");
+                telemetry.update();
+            }
         } else if (gamepad1.b) {
-            myMecanumBot.setArmToCollect();
+            if(!isArmDown){
+                myMecanumBot.setArmToCollect();
+                telemetry.addData("Arm Status", "The Arm is Moving Down");
+                telemetry.update();
+                isArmDown = true;
+            }else {
+                telemetry.addData("Arm Status", "The Arm is Down...stop pressing B!");
+                telemetry.update();
+            }
         }
 
     }//END OF LOOP
