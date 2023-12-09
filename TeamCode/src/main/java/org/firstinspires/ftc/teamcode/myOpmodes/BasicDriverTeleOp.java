@@ -10,12 +10,13 @@ import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
 
 /**
  * This is a Iterative Opmode driver program for a small
- *  mecanum chassis this robot will have an intake, a
- *  virtual four bar lift, powered by a motor,
- *  and some servos interating with the Pixel.
+ *  mecanum chassis; this robot will have an (servo) intake, a
+ *  virtual four bar lift, powered by a motor, a standard servo
+ *  to control the angle of the bucket (pixel holder)
+ *  and servos interacting with (clamping) the Pixel.
  *
  * @author DNel2
- * @version 11/28/2021 v1.0 updated 2/17/2022 v2.0
+ * @version 11/28/2021 v1.0 updated 12/07/2023 v3.0
  */
 @TeleOp(name = "Basic Mec Drive", group = "Iterative Opmode")
 //@Disabled
@@ -48,9 +49,9 @@ public class BasicDriverTeleOp extends OpMode {
 //        telemetry.addData("Dist Back (IN): ", myMecanumBot.getCurrentDistanceBack(DistanceUnit.INCH));
 //        telemetry.update();
 
-        //----------------------//
-        // Main Driving Control //
-        //----------------------//
+        //------------------------------//
+        // Main Chassis Driving Control //
+        //------------------------------//
         if (gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2 ||
                 gamepad1.left_stick_x > 0.2 || gamepad1.left_stick_x < -0.2) {
             //Make the y value negative because forward on the game controller
@@ -83,11 +84,11 @@ public class BasicDriverTeleOp extends OpMode {
         //Press X to spin servo for IN or A for OUT
         if (gamepad1.a) {
             myMecanumBot.setIntatkeRotation(-0.75);
-            telemetry.addData("Servo Moving OUT", "Yes");
+            telemetry.addData("Servo Rotating OUT", "Yes");
             telemetry.update();
         } else if (gamepad1.x){
             myMecanumBot.setIntatkeRotation(0.75);
-            telemetry.addData("Servo Moving IN", "Yes");
+            telemetry.addData("Servo Rotating IN", "Yes");
             telemetry.update();
         }else{
             myMecanumBot.setIntatkeRotation(0);
@@ -95,8 +96,8 @@ public class BasicDriverTeleOp extends OpMode {
 
         //Servo for Bucket, pixel collected
         // 0.5 is a Good delivery
-        // 0.1 is a Good up pos for once the pixel is collect
-        // 0.2 is Good for being almost ready to receive the pixel
+        // 0.1 is a Good up pos for once the pixel is collected
+        // 0.2 is Good for a neutral, "ready" to receive the pixel
         // 0.28 is Good for Collecting
         if(gamepad1.dpad_up){//good up pos
             myMecanumBot.setBucketServoPos(0.1);
@@ -109,8 +110,8 @@ public class BasicDriverTeleOp extends OpMode {
         }
 
         //Position Info:
-        //  0.3 close
-        //  0.65 open
+        //  0.3 close (down)
+        //  0.65 open (up)
         if(gamepad1.left_bumper){
             myMecanumBot.setBucketClampServo(0.3);
         }else if(gamepad1.right_bumper){

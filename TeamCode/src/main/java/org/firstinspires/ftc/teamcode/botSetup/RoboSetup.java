@@ -325,7 +325,7 @@ public class RoboSetup {
     /////////////////////////////////////////////
 
     /**
-     *  This method will rotate the servo
+     *  This method will rotate the Continuous servo
      *    that is being used for the intake
      *
      * @param power
@@ -335,7 +335,8 @@ public class RoboSetup {
     }
 
     /**
-     * This method will control the bucket servo
+     * This method will control the bucket servo (torque)
+     *
      * @param servoPos - this variable will set the position of the servo
      *
      */
@@ -346,6 +347,8 @@ public class RoboSetup {
     /**
      * The setBucketClamp() method will open and close the clamp
      * and take a double pos value
+     *
+     * @param servoPos - this double value will set the clamp position
      */
     public void setBucketClampServo(double servoPos){
         bucketClampServo.setPosition(servoPos);
