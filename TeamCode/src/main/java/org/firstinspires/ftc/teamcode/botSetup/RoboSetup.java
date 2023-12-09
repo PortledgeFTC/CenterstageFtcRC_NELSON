@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import static java.lang.Thread.sleep;
 
 /**
  * This is the code for setting up my Centerstage robot which consists of
@@ -29,7 +30,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  *  SERVOS
  *  Port 0 - bucketServo
- *  Port 5 - intakeServo (continous)
+ *  Port 5 - intakeServo (continuous)
  *
  *  SENSORS
  *  I2C Expansion
@@ -38,7 +39,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  * --- Expansion Hub ----
  * Port 0 - Motor TBD
- * Port 3 - Motor TBD
+ * Port 3 - Motor armMotor
  *
  * @author DNel2
  * @version 10/06/2023
