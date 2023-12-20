@@ -28,6 +28,7 @@ import static java.lang.Thread.sleep;
  *
  *  SERVOS
  *  Port 0 - bucketServo
+ *  Port 1 - bucketClampServo
  *  Port 5 - intakeServo (continuous)
  *
  *  SENSORS
@@ -36,8 +37,8 @@ import static java.lang.Thread.sleep;
  *  Port 1 - backDist
  *
  * --- Expansion Hub ----
- * Port 0 - Motor TBD
- * Port 3 - Motor armMotor
+ * Port 0 - Motor armMotor
+ * Port 3 - Motor TBD
  *
  * @author DNel2
  * @version 10/06/2023
@@ -385,7 +386,7 @@ public class RoboSetup {
             //This is an empty loop to make sure that the arm has time to run
         }
         // Stop all motion;
-        armMotor.setPower(0);
+        //armMotor.setPower(0);
 
         //Moves the bucket up so it can pass by the intake
         setBucketServoPos(0.5);

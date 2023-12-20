@@ -132,6 +132,7 @@ public class BasicDriverTeleOp extends OpMode {
                 telemetry.addData("Arm Status", "Arm is Moving up");
                 telemetry.update();
                 isArmUp = true;
+                isArmDown = false;
             }else{
                 telemetry.addData("Arm Status", "The Arm is already up...stop pushing Y!");
                 telemetry.update();
@@ -142,6 +143,7 @@ public class BasicDriverTeleOp extends OpMode {
                 telemetry.addData("Arm Status", "The Arm is Moving Down");
                 telemetry.update();
                 isArmDown = true;
+                isArmUp = false;
             }else {
                 telemetry.addData("Arm Status", "The Arm is Down...stop pressing B!");
                 telemetry.update();
