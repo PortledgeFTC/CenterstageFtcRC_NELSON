@@ -61,13 +61,22 @@ public class BasicAutoAudienceRed extends LinearOpMode {
         }
         runtime.reset();//resets the timer
 
-        //STEP 02 - Slide Right off of wall about 2 inches *future step would be to read the
-        myMec.resetEncoders();
-        while(opModeIsActive() && (myMec.getRotationBR() < 0.5)){
+        //STEP 02 - Move Forward
+//        myMec.resetEncoders();
+//        while(opModeIsActive() && (myMec.getRotationBR() < 0.5)){
+//            telemetry.addData("Rotation: ", myMec.getRotationBR());
+//            telemetry.addData("Status:", "Step 2 Execute");
+//            telemetry.update();
+//            myMec.setMecanumDrive(0,-0.2,0);
+//
+//        }
+
+        while(opModeIsActive() && runtime.seconds() < 10){
             telemetry.addData("Rotation: ", myMec.getRotationBR());
             telemetry.addData("Status:", "Step 2 Execute");
             telemetry.update();
-            myMec.setMecanumDrive(0,-0.2,0);
+            myMec.setMecanumDrive(-0.2,0,0);
+
         }
         //Stop Robot
         myMec.setMecanumDrive(0,0,0);
