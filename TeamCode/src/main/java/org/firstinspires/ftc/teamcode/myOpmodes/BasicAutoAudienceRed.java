@@ -61,27 +61,29 @@ public class BasicAutoAudienceRed extends LinearOpMode {
         }
         runtime.reset();//resets the timer
 
-        //STEP 02 - Move Forward
-//        myMec.resetEncoders();
-//        while(opModeIsActive() && (myMec.getRotationBR() < 0.5)){
+        //STEP 02 - Move Forward a set distance to check for team prop on spike line
+        myMec.setForwardToDist(8);
+
+//        while(opModeIsActive() && runtime.seconds() < 10){
 //            telemetry.addData("Rotation: ", myMec.getRotationBR());
 //            telemetry.addData("Status:", "Step 2 Execute");
 //            telemetry.update();
-//            myMec.setMecanumDrive(0,-0.2,0);
-//
+//            myMec.setMecanumDrive(-0.2,0,0);
 //        }
 
-        while(opModeIsActive() && runtime.seconds() < 10){
-            telemetry.addData("Rotation: ", myMec.getRotationBR());
-            telemetry.addData("Status:", "Step 2 Execute");
-            telemetry.update();
-            myMec.setMecanumDrive(-0.2,0,0);
 
-        }
-        //Stop Robot
+        //STEP 03 - Detect Pixel / Team Prop Location
+        //Check to see where the team prop is using dist sensor
+        // then deliver purple pixel game element to correct location
+
+        //STEP 04 - Return to Starting location
+
+        //STEP 05 - Drive under Truss until crosses the backstage line
+
+        //STEP 06 - Drop last Pixel
+
+        //STEP 07 - Stop Robot
         myMec.setMecanumDrive(0,0,0);
-
-        //STEP 03 - Drive Backwards until crosses the backstage line
 
     }//END OF runOpMode()
 }

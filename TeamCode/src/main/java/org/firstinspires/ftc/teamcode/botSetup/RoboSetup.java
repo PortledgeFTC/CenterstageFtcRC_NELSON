@@ -97,12 +97,14 @@ public class RoboSetup {
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (GOBILDA_COUNTS_OUTPUT * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_INCHES * 3.1415);
+            (WHEEL_DIAMETER_INCHES * Math.PI);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
 
     int newUpTarget;
     int newDownTarget;
+
+    double newGeneralTarget;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -176,6 +178,43 @@ public class RoboSetup {
         frontLeft.setPower(power);
         backRight.setPower(power);
         frontRight.setPower(power);
+    }
+
+    /**
+     * The setForwardToDist() method will use encoders to
+     *   rotate the wheels for a specific amount of time
+     *   to reach a passed distance
+     *
+     * @param targetDist - this will be the target distance in INCHES
+     *
+     */
+    public void setForwardToDist(double targetDist){
+        //This is the value for moving to the correct position
+        double countToMove = COUNTS_PER_INCH * targetDist;
+
+        //Reset the timer
+        runtime.reset();
+
+        while(runtime.seconds() < 1){
+            //This is a break for the Alliance Partner to have enough time to move
+            //  out of the way if starting on Audience side... might remove later
+        }
+
+        // Determine new target position, and pass to motor controller
+        newGeneralTarget = backRight.getCurrentPosition() + countToMove;
+        backRight.setTargetPosition((int)newGeneralTarget);
+
+        // Turn On RUN_TO_POSITION
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // start motion.
+        setMecanumDrive(0.2, 0.0, 0.0);
+
+        // keep looping while we are still active
+        while (backRight.isBusy()) {
+            //This is an empty loop to make sure that the arm has time to run
+        }
+        setMecanumDrive(0.0,0.0,0.0);
     }
 
     /**
