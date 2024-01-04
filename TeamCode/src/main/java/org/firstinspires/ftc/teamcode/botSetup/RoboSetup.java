@@ -33,8 +33,10 @@ import static java.lang.Thread.sleep;
  *
  *  SENSORS
  *  I2C Expansion
- *  Port 0 - rightDist (Distance Sensor)
- *  Port 1 - backDist
+ *  Port 0 - leftColor (Rev V3 Color Sensor)
+ *  Port 1 - leftDist (REV 2M Distance Sensor)
+ *  Port 2 - rightColor (Rev V3 Color Sensor)
+ *  Port 3 - rightDist (REV 2M Distance Sensor)
  *
  * --- Expansion Hub ----
  * Port 0 - Motor armMotor
@@ -67,8 +69,8 @@ public class RoboSetup {
     //////////////////////
     //      Sensors      //
     //////////////////////
-//    private DistanceSensor myDistanceSensorRight;
-//    private DistanceSensor myDistanceSensorBack;
+    private DistanceSensor rightDist;
+    private DistanceSensor leftDist;
 //    //private TouchSensor myLiftTouch;
 
     /////////////////////////////
@@ -141,8 +143,8 @@ public class RoboSetup {
         armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Setting up the Sensors
-//        myDistanceSensorRight = hwMap.get(DistanceSensor.class, "distSensor");
-//        myDistanceSensorBack = hwMap.get(DistanceSensor.class, "distSensorBack");
+        rightDist = hwMap.get(DistanceSensor.class, "rightDist");
+        leftDist = hwMap.get(DistanceSensor.class, "leftDist");
         // myLiftTouch = hwMap.get(TouchSensor.class, "liftTouch");
 
         //Setting up the servos
@@ -449,9 +451,9 @@ public class RoboSetup {
      * @return Double value for the distance read from the sensor
      *
      */
-//    public double getCurrentDistanceRight(DistanceUnit du){
-//        return myDistanceSensorRight.getDistance(du);
-//    }
+    public double getCurrentDistanceRight(DistanceUnit du){
+        return rightDist.getDistance(du);
+    }
 
     /**
      * This method will return the sensor reading
@@ -461,9 +463,9 @@ public class RoboSetup {
      * @return Double value for the distance read from the sensor
      *
      */
-//    public double getCurrentDistanceBack(DistanceUnit du){
-//        return myDistanceSensorBack.getDistance(du);
-//    }
+    public double getCurrentDistanceLeft(DistanceUnit du){
+        return leftDist.getDistance(du);
+    }
 
 
     /**
@@ -505,7 +507,6 @@ public class RoboSetup {
 
     /**
      * This method will return the motor encoder rotations
-     *
      * FRONT RIGHT WHEEL
      *
      * @return - the number of rotations

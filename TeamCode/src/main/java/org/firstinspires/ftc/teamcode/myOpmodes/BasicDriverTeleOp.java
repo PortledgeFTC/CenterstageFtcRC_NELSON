@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
 
 /**
- * This is a Iterative Opmode driver program for a small
+ * This is a Iterative OpMode driver program for a small
  *  mecanum chassis; this robot will have an (servo) intake, a
  *  virtual four bar lift, powered by a motor, a standard servo
  *  to control the angle of the bucket (pixel holder)
@@ -18,7 +18,7 @@ import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
  * @author DNel2
  * @version 11/28/2021 v1.0 updated 12/07/2023 v3.0
  */
-@TeleOp(name = "Basic Mec Drive", group = "Iterative Opmode")
+@TeleOp(name = "Basic Mec Drive", group = "Iterative OpMode")
 //@Disabled
 public class BasicDriverTeleOp extends OpMode {
     //Create an instance of the RoboSetup
@@ -60,14 +60,14 @@ public class BasicDriverTeleOp extends OpMode {
             motorSpeedX = gamepad1.left_stick_x;
             motorSpeedRx = gamepad1.right_stick_x;
             myMecanumBot.setMecanumDrive(motorSpeedY, motorSpeedX, motorSpeedRx);
-            telemetry.addData("Gamepad Driving:", gamepad1.left_stick_y);
+            telemetry.addData("Game pad Driving:", gamepad1.left_stick_y);
             telemetry.update();
         } else if (gamepad1.right_stick_x > 0.2 || gamepad1.right_stick_x < -0.2) {
             motorSpeedY = -gamepad1.left_stick_y;
             motorSpeedX = gamepad1.left_stick_x;
             motorSpeedRx = gamepad1.right_stick_x;
             myMecanumBot.setMecanumDrive(motorSpeedY, motorSpeedX, motorSpeedRx);
-            telemetry.addData("Gamepad Right Stick X:", gamepad1.right_stick_x);
+            telemetry.addData("Game pad Right Stick X:", gamepad1.right_stick_x);
             telemetry.update();
         } else {
             myMecanumBot.setForward(0.0);
@@ -149,6 +149,10 @@ public class BasicDriverTeleOp extends OpMode {
                 telemetry.update();
             }
         }
+
+        telemetry.addData("Right Dist: ", myMecanumBot.getCurrentDistanceRight(DistanceUnit.INCH));
+        telemetry.addData("Left Dist: ",myMecanumBot.getCurrentDistanceLeft(DistanceUnit.INCH));
+        telemetry.update();
 
     }//END OF LOOP
 
