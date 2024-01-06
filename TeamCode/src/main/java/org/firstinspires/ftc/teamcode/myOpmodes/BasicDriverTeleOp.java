@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.botSetup.RoboSetup;
  *  and servos interacting with (clamping) the Pixel.
  *
  * @author DNel2
- * @version 11/28/2021 v1.0 updated 12/07/2023 v3.0
+ * @version 11/28/2021 v1.0 updated 1/06/2024 v3.0
  */
 @TeleOp(name = "Basic Mec Drive", group = "Iterative OpMode")
 //@Disabled

@@ -43,7 +43,7 @@ import static java.lang.Thread.sleep;
  * Port 3 - Motor TBD
  *
  * @author DNel2
- * @version 10/06/2023
+ * @version v1 10/06/2023 current update 1/6/2024
  *
  */
 public class RoboSetup {
@@ -183,7 +183,7 @@ public class RoboSetup {
     /**
      * The setForwardToDist() method will use encoders to
      *   rotate the wheels for a specific amount of time
-     *   to reach a passed distance
+     *   to reach a passed target distance (mainly in autonomous)
      *
      * @param targetDist - this will be the target distance in INCHES
      *
