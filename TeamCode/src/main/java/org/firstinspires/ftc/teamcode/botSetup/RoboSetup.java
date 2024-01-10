@@ -240,6 +240,54 @@ public class RoboSetup {
     }
 
     /**
+     * The setSlideToDist() method will use encoders to
+     *   rotate the wheels for a specific amount of time
+     *   to reach a passed target distance (mainly in autonomous)
+     *
+     * @param targetDist - this will be the target distance in INCHES
+     * @param slideDirection - this will be the direct to slide... left or right
+     *
+     */
+    public void setSlideToDist(double targetDist, String slideDirection){
+        //This is the value for moving to the correct position
+        double countToMove = COUNTS_PER_INCH * targetDist;
+
+        //Might need to make the encoder target value negative
+        if(slideDirection.equalsIgnoreCase("left")){
+            countToMove*=-1;
+        }
+
+        //Reset the timer
+        runtime.reset();
+
+        while(runtime.seconds() < 1){
+            //This is a break for the Alliance Partner to have enough time to move
+            //  out of the way if starting on Audience side... might remove later
+        }
+
+        // Determine new target position, and pass to motor controller
+        newGeneralTarget = backRight.getCurrentPosition() + countToMove;
+        backRight.setTargetPosition((int)newGeneralTarget);
+
+        // Turn On RUN_TO_POSITION
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // start motion.
+        if(slideDirection.equalsIgnoreCase("left")){
+            setMecanumDrive(0.0, -0.2, 0.0);
+        }else{
+            setMecanumDrive(0.0, 0.2, 0.0);
+        }
+
+
+        // keep looping while we are still active
+        while (backRight.isBusy()) {
+            //This is an empty loop to make sure that the arm has time to run
+        }
+        setMecanumDrive(0.0,0.0,0.0);
+    }
+
+    /**
      * This method will move the robot to slide to the Right
      * @param power - double value to set the power of the movement
      */
